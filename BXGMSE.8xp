@@ -3,15 +3,13 @@ ZStandard
 ZSquare
 ZDecimal
 GridOn
+Lbl GG
 Line(~4,3,~4,~3
 Line(~4,3,~4,~3,0
 Line(4,3,4,~3
 Line(4,3,4,~3,0
-{6,6}->dim([A]
-Fill(0,[A]
 1->F:1->E
 0->X:0->Y:0->A:0->B:0->C:0-D:0->G:0->H:0->I:0->J
-//[A]-Position of initials
 //A-X of last position
 //B-Y or last position
 //C-X of end point
@@ -25,11 +23,9 @@ Fill(0,[A]
 //L-Drawn Line orientation 1=left,2=up,3=right,4=down
 //M-row(y) of point
 //N-column(x) of point
-//O-row of matrix
-//P-column of matrix
+//Q-0=no box 1=box
 //X-X of current point
 //Y-Y of current point
-
 Lbl 00
 Text(2,4,1
 Text(12,2,"|L
@@ -95,12 +91,12 @@ Lbl DP
 Pt-On(X,Y,2
 Lbl PL
 getKey->K
-If K=45
+If (K=45) or (K=21) or (K=105)
 Then
 	Pt-Off(X,Y,2
+	Pt-On(X,Y,3
 	Goto 00
 End
-
 If K=24
 Then
 	//left
@@ -113,68 +109,182 @@ Then
 	//up
 	X->C
 	Y+1->D
-	1->L
+	2->L
 End
 If K=26
 Then
 	//right
 	X+1->C
 	Y->D
-	0->L
+	3->L
 End
 If K=34
 Then
 	//down
 	X->C
 	Y-1->D
-	1->L
+	4->L
 End
 If (K=24) or (K=25) or (K=26) or (K=34):Goto DL
 Goto PL
-
 Lbl DL
+If (K=24 and X=~3) or (K=25 and Y=3) or (K=26 and X=3) or (K=34 and Y=~3)
+Then
+	Pt-Off(X,Y,2
+	Pt-On(X,Y,3
+	Goto 00
+End
 1->F
+0->Q
 Line(X,Y,C,D
 Pt-Off(X,Y,3
 Pt-On(C,D,2
 C->X
 D->Y
-int((Y-Ymin)/(Ymax-Ymin)*62)->M
-int((X-Xmin)/(Xmax-Xmin)*94)->N
+63-int((Y-Ymin)/(Ymax-Ymin)*63)->M
+int((X-Xmin)/(Xmax-Xmin)*95)+1->N
 If L=1 or L=3
-//If line is horizontal
 Then
-	//*/test point is taken from x,y (end of line that was just drawn)/*
-	
-	If L=1
+	If L=1:N+4->N
+	If L=3:N-6->N
+	If M=2 or M=62
 	Then
-		If pxl-Test(M+10,N+5)pxl-Test(M+5,N)pxl-Test(M+5,N+10)not([A](1,1)=1)
+		If M=2
 		Then
-			Text(~1,0,0,"Hooray
-			//draw and store shit
-			End
+		If pxl-Test(M+9,N)pxl-Test(M+4,N-5)pxl-Test(M+4,N+5
+		Then
+			1->Q
+			//Text(~1,30,0,"Hv
+				If not(pxl-Test(M+4,N
+				//if on top row
+			Then
+			If E=1
+			Then
+				Text(M+1,N-1,1
+						I+1->I
+				End
+			If E=2
+			Then
+				Text(M+1,N-1,2
+						J+1->J
+				End
+				End
+	End
 		End
-	//test up .5 and down .5
-	//move test point .5 to the right and test 1 up and 1 down
-	//move test point .5 to right and test up .5 and down .5
-	//Store yes or no: End
-	
-	//If L=3 
-	//Then
-	//test point .5 up and .5 down
-	//move point .5 to left and test up 1 and down 1
-	//move point .5 to left and test up .5 and down .5
-	//store yes or no: End 
-	//If yes:
-	//Test for upper initial
-	//If no initial:goto IU
-	//If initial, 
-	//test lower initial:
-	//If initial: decrement G or H: preserve E:Goto 0:
+		If M=62
+		Then
+			If pxl-Test(M-11,N)pxl-Test(M-6,N-5)pxl-Test(M-6,N+5
+			Then
+				1->Q
+				//Text(~1,30,0,"H^
+				If not(pxl-Test(M-6,N
+				//if on bottom row
+				Then
+				If E=1
+				Then
+					Text(M-9,N-1,1
+						I+1->I
+				End
+				If E=2
+				Then
+					Text(M-9,N-1,2
+						J+1->J
+					End
+					End
+	End
+End
+Else
+	If pxl-Test(M+9,N)pxl-Test(M+4,N-5)pxl-Test(M+4,N+5
+		Then
+			1->Q
+			//Text(~1,30,0,"Hv
+			If not(pxl-Test(M+4,N
+			//normal vv
+			Then
+			If E=1
+			Then
+				Text(M+1,N-1,1
+					I+1->I
+				End
+			If E=2
+			Then
+				Text(M+1,N-1,2
+					J+1->J
+				End
+				End
+	End
+	If pxl-Test(M-11,N)pxl-Test(M-6,N-5)pxl-Test(M-6,N+5
+		Then
+			1->Q
+			//Text(~1,30,0,"H^
+			If not(pxl-Test(M-6,N
+			//normal ^^
+			Then
+			If E=1
+			Then
+				Text(M-9,N-1,1
+					I+1->I
+			End
+			If E=2
+			Then
+				Text(M-9,N-1,2
+					J+1->J
+				End
+				End
+	End
+End
 End
 
+If L=2 or L=4
+Then
+	If L=2:M+4->M
+	If L=4:M-6->M
+	If pxl-Test(M,N+9)pxl-Test(M-5,N+4)pxl-Test(M+5,N+4
+	Then
+		1->Q
+		//Text(~1,30,0,"V>
+		If not(pxl-Test(M,N+4
+		//normal >>
+		Then
+		If E=1
+		Then
+			Text(M-3,N+3,1
+				I+1->I
+		End
+		If E=2
+		Then
+			Text(M-3,N+3,2
+				J+1->J
+			End
+			End
+	End
+	If pxl-Test(M,N-11)pxl-Test(M-5,N-6)pxl-Test(M+5,N-6
+	Then
+		1->Q
+		//Text(~1,30,0,"V<
+		If not(pxl-Test(M,N-6
+		//normal <<
+		Then
+		If E=1
+		Then
+			Text(M-3,N-7,1
+				I+1->I
+		End
+		If E=2
+		Then
+			Text(M-3,N-7,2
+				J+1->J
+			End
+			End
+	End
+End
 
-
+If Q=1
+Then
+	If E=1:G+1->G
+	If E=2:H+1->H
+	Else
+	
 If E=1
 Then
 	2->E
@@ -182,5 +292,28 @@ Then
 	Else
 	1->E
 	H+1->H
+	End
 End
+If I+J=36:Goto XX
 Goto 00
+Lbl XX
+ClrDraw
+Text(10,26,"The Winner is
+If I=J
+Then
+	Text(~1,20,16,"It's a tie!!
+	Else
+If I>J
+Then
+	Text(~1,20,16,"Player 1!!
+	Else
+	Text(~1,20,16,"Player 2!!
+	End
+	End
+Text(30,30,"1) Play Again"
+Text(38,30,"2) Quit
+Lbl KK
+getKey->K
+If K=92:Goto GG
+If K=93:Stop
+Goto KK
