@@ -1,6 +1,6 @@
 iBOXGAME
 det(0
-70->x->C
+70->X->C
 30->Y->D
 1->F->P
 det(5,149
@@ -77,7 +77,7 @@ Lbl DP
 det(2,128
 det(34,X,Y,4
 Lbl PL
-getkey->K
+getKey->K
 If K=1
 X->G
 Y+30->H
@@ -103,12 +103,12 @@ det(2,223
 det(34,X,Y,4
 Goto 00
 End
-If K=1 or K=2, or K=3 or K=4
+If K=1 or K=2 or K=3 or K=4
 Goto DL
 End
 Goto PL
 Lbl DL
-If (K=2 and X=70) or (K=1 and Y=210) or (K=3 and X=250 or (K=4 and Y=30)
+If (K=2 and X=70) or (K=1 and Y=210) or (K=3 and X=250) or (K=4 and Y=30)
 det(2,224
 det(34,X,Y,4
 Goto 00
