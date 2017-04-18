@@ -69,7 +69,7 @@ End
 If Y>210
 30->Y
 End
-Goto oo
+Goto 00
 End
 Goto 01
 Return
