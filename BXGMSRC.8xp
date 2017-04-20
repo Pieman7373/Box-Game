@@ -5,7 +5,7 @@ det(0
 1->F->P
 det(5,149
 det(2,224
-For(48
+For(49
 	det(40,C,D,4
 	C+30->C
 	If C>250
