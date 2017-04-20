@@ -115,7 +115,6 @@ If K=1 or K=2 or K=3 or K=4
 Goto DL
 End
 Goto PL
-iReturn
 Lbl DL
 If (K=2 and X=70) or (K=1 and Y=210) or (K=3 and X=250) or (K=4 and Y=30)
 det(2,224
