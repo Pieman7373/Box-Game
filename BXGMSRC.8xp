@@ -71,6 +71,9 @@ End
 If X>250
 70->X
 End
+If Y<30
+210->Y
+End
 If Y>210
 30->Y
 End
@@ -101,10 +104,10 @@ End
 If K=4
 X->G
 Y-30->Y
-2-L
+2->L
 End
 If K=9 or K=54 or K=15
-det(2,223
+det(2,224
 det(34,X,Y,4
 Goto 00
 End
@@ -112,6 +115,7 @@ If K=1 or K=2 or K=3 or K=4
 Goto DL
 End
 Goto PL
+iReturn
 Lbl DL
 If (K=2 and X=70) or (K=1 and Y=210) or (K=3 and X=250) or (K=4 and Y=30)
 det(2,224
