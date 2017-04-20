@@ -33,7 +33,7 @@ If P=2
 	det(41,277,27,20,27
 End
 If F=0
-	det(2,0
+	det(2,224
 	det(33,A,B,5
 	det(33,A,B,6
 End
