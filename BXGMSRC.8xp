@@ -126,7 +126,7 @@ Y->B
 G->X
 H->Y
 If P=1
-2+P
+2->P
 Else
 1->P
 End
