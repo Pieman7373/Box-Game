@@ -128,6 +128,7 @@ X->A
 Y->B
 G->X
 H->Y
+prgmPXLTEST
 If P=1
 	2+P
 Else
