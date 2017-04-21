@@ -16,21 +16,21 @@ End
 SetTextFGColor(231
 PrintStringXY(18,"BOXGAME: ICE VERSION",1,1
 SetTextFGColor(24
-det(74,2,3
+SetTextScale(2,3
 PrintStringXY("1",30,30
 PrintStringXY("2",280,30
 Lbl 00
 If P=1
 	SetColor(149
-	det(41,277,27,20,27
+	Rectangle_NoClip(41,277,27,20,27
 	SetColor(0
-	det(41,27,27,18,27
+	Rectangle_NoClip(41,27,27,18,27
 End
 If P=2
 	SetColor(149
-	det(41,27,27,18,27
+	Rectangle_NoClip(41,27,27,18,27
 	SetColor(0
-	det(41,277,27,20,27
+	Rectangle_NoClip(41,277,27,20,27
 End
 If F=0
 	SetColor(0
@@ -83,7 +83,7 @@ Goto 01
 Return
 Lbl DP
 SetColor(128
-FillCircle(X,Y,4
+FillCircle_NoClip(X,Y,4
 Lbl PL
 getKey->K
 If K=1
@@ -108,7 +108,7 @@ If K=4
 End
 If K=9 or K=54 or K=15
 	SetColor(223
-	FillCircle(X,Y,4
+	FillCircle_NoClip(X,Y,4
 	Goto 00
 End
 If K=1 or K=2 or K=3 or K=4
@@ -118,17 +118,16 @@ Goto PL
 Lbl DL
 If (K=2 and X=70) or (K=1 and Y=210) or (K=3 and X=250) or (K=4 and Y=30)
 	SetColor(224
-	FillCircle(X,Y,4
+	FillCircle_NoClip(X,Y,4
 	Goto 00
 End
 SetColor(128
 Line(X,Y,G,H
-FillCircle(G,H,4
+FillCircle_NoClip(G,H,4
 X->A
 Y->B
 G->X
 H->Y
-prgmPXLTEST
 If P=1
 	2+P
 Else
