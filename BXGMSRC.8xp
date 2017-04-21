@@ -33,7 +33,7 @@ If P=2
 	Rectangle_NoClip(41,277,27,20,27
 End
 If F=0
-	SetColor(0
+	SetColor(24
 	Circle(A,B,5
 	Circle(A,B,6
 End
